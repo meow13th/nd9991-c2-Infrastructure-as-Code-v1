@@ -1,0 +1,30 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::meow-bucket/*"
+            ]
+        },
+        {
+            "Sid": "IPAllow",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::meow-bucket/*",
+            "Condition": {
+              "NotIpAddress": {
+                "aws:SourceIp": [
+                  "60.234.84.18/32"
+                ]
+              }
+            }
+        }
+    ]
+}
